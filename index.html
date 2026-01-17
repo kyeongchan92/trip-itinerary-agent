@@ -111,6 +111,7 @@
         .legend-dot.food { background: #f59e0b; }
         .legend-dot.night { background: #ec4899; }
         .legend-dot.airport { background: #10b981; }
+        .legend-dot.hotel { background: #3b82f6; }
 
         /* Schedule Section */
         .schedule-section {
@@ -367,6 +368,10 @@
             background: #ec4899;
         }
 
+        .custom-marker.hotel {
+            background: #3b82f6;
+        }
+
         /* Popup Styling */
         .leaflet-popup-content-wrapper {
             border-radius: 12px;
@@ -599,6 +604,193 @@
         .packing-category label {
             cursor: pointer;
             flex: 1;
+        }
+
+        /* Budget Summary */
+        .budget-summary {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .budget-summary h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .budget-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .budget-table td:first-child {
+            color: #555;
+        }
+
+        .budget-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .budget-table tr.total td {
+            border-top: 2px solid #667eea;
+            border-bottom: none;
+            padding-top: 12px;
+            color: #667eea;
+        }
+
+        .budget-note {
+            margin: 12px 0 0 0;
+            font-size: 0.85rem;
+            color: #888;
+            text-align: center;
+        }
+
+        /* Plan B Page */
+        .planb-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .planb-header h2 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .planb-header p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .location-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .location-btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .location-btn:active {
+            background: #3367d6;
+        }
+
+        .location-btn.loading {
+            opacity: 0.7;
+        }
+
+        #location-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        #location-text.success {
+            color: #10b981;
+        }
+
+        .planb-select-wrapper {
+            margin-bottom: 15px;
+        }
+
+        .planb-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            color: #333;
+        }
+
+        .planb-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .planb-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .planb-card.original {
+            border: 2px solid #667eea;
+            background: #f5f3ff;
+        }
+
+        .planb-card-info {
+            flex: 1;
+        }
+
+        .planb-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .planb-card.original .planb-name {
+            color: #667eea;
+        }
+
+        .planb-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .planb-card-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .planb-distance {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .planb-distance.unknown {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        .planb-map-btn {
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
         }
 
         /* Scrollbar */
@@ -1132,6 +1324,10 @@
                     <div class="legend-item">
                         <div class="legend-dot night"></div>
                         <span>야시장/야경</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot hotel"></div>
+                        <span>숙소</span>
                     </div>
                 </div>
             </div>
@@ -1709,102 +1905,37 @@
         </div><!-- End tab-transport -->
         </div><!-- End page-food -->
 
-        <!-- Budget Page -->
-        <div class="page" id="page-budget">
-        <!-- Budget Section -->
-        <div class="budget-section" id="budget-section">
-            <div class="budget-header">
-                <div class="budget-toggle">
-                    <button class="active" data-travelers="2">2인</button>
-                    <button data-travelers="1">1인</button>
-                </div>
+        <!-- Plan B Page -->
+        <div class="page" id="page-planb">
+            <div class="planb-header">
+                <h2>🔄 플랜B 대안</h2>
+                <p>현재 위치에서 각 장소까지 거리를 비교해보세요</p>
             </div>
-            <div class="budget-total">
-                <div class="total-amount" id="total-amount">₩1,447,000</div>
-                <div class="total-label" id="total-label">2인 총 예상 비용</div>
-                <div class="exchange-rate">환율: 1 TWD ≈ 42 KRW</div>
+
+            <!-- Location Status -->
+            <div class="location-status">
+                <button id="get-location" class="location-btn">
+                    <i class="fas fa-location-arrow"></i> 현재 위치 가져오기
+                </button>
+                <span id="location-text">위치 정보 없음</span>
             </div>
-            <div class="budget-items" id="budget-items">
-                <div class="budget-item" data-krw2="800000" data-krw1="400000">
-                    <div class="item-icon">✈️</div>
-                    <div class="item-info">
-                        <div class="item-name">항공권</div>
-                        <div class="item-note">왕복 직항</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩800,000</div>
-                        <div class="item-ntd">1인 ₩400,000</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="252000" data-krw1="126000" data-ntd="6000">
-                    <div class="item-icon">🏨</div>
-                    <div class="item-info">
-                        <div class="item-name">숙박 (3박)</div>
-                        <div class="item-note">3성급+ 호텔</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩252,000</div>
-                        <div class="item-ntd">NT$6,000</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="42000" data-krw1="21000" data-ntd="1000">
-                    <div class="item-icon">🚇</div>
-                    <div class="item-info">
-                        <div class="item-name">교통비</div>
-                        <div class="item-note">MRT, 페리, 택시</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩42,000</div>
-                        <div class="item-ntd">NT$1,000</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="168000" data-krw1="84000" data-ntd="4000">
-                    <div class="item-icon">🍜</div>
-                    <div class="item-info">
-                        <div class="item-name">식비 (4일)</div>
-                        <div class="item-note">1인 1일 NT$500</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩168,000</div>
-                        <div class="item-ntd">NT$4,000</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="16800" data-krw1="8400" data-ntd="400">
-                    <div class="item-icon">🎫</div>
-                    <div class="item-info">
-                        <div class="item-name">관광/입장료</div>
-                        <div class="item-note">영사관 등</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩16,800</div>
-                        <div class="item-ntd">NT$400</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="126000" data-krw1="63000" data-ntd="3000">
-                    <div class="item-icon">🛍️</div>
-                    <div class="item-info">
-                        <div class="item-name">쇼핑/기념품</div>
-                        <div class="item-note">펑리수, 기념품 등</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩126,000</div>
-                        <div class="item-ntd">NT$3,000</div>
-                    </div>
-                </div>
-                <div class="budget-item" data-krw2="42000" data-krw1="21000" data-ntd="1000">
-                    <div class="item-icon">💵</div>
-                    <div class="item-info">
-                        <div class="item-name">예비비</div>
-                        <div class="item-note">여유자금</div>
-                    </div>
-                    <div class="item-amount">
-                        <div class="item-krw">₩42,000</div>
-                        <div class="item-ntd">NT$1,000</div>
-                    </div>
-                </div>
+
+            <!-- Time Slot Selection -->
+            <div class="planb-select-wrapper">
+                <select id="planb-time" class="planb-select">
+                    <option value="day1-lunch">Day1 점심 (시즈완/하마싱)</option>
+                    <option value="day1-dinner">Day1 저녁 (루이펑 야시장)</option>
+                    <option value="day2-lunch">Day2 점심 (치진섬)</option>
+                    <option value="day2-dinner">Day2 저녁 (보얼/아이허)</option>
+                    <option value="day3-lunch">Day3 점심 (연지담)</option>
+                </select>
             </div>
-        </div>
-        </div><!-- End page-budget -->
+
+            <!-- Plan B List -->
+            <div class="planb-list" id="planb-list">
+                <!-- Rendered by JavaScript -->
+            </div>
+        </div><!-- End page-planb -->
 
         <!-- Checklist Page -->
         <div class="page" id="page-checklist">
@@ -1849,6 +1980,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- Budget Summary -->
+        <div class="budget-summary">
+            <h3>💰 예산 요약 (2인 기준)</h3>
+            <table class="budget-table">
+                <tr><td>✈️ 항공권</td><td>₩800,000</td></tr>
+                <tr><td>🏨 숙박 (3박)</td><td>₩252,000</td></tr>
+                <tr><td>🚇 교통</td><td>₩42,000</td></tr>
+                <tr><td>🍜 식비</td><td>₩168,000</td></tr>
+                <tr><td>🎫 관광</td><td>₩16,800</td></tr>
+                <tr><td>🛍️ 쇼핑</td><td>₩126,000</td></tr>
+                <tr><td>💵 예비비</td><td>₩42,000</td></tr>
+                <tr class="total"><td><strong>합계</strong></td><td><strong>₩1,447,000</strong></td></tr>
+            </table>
+            <p class="budget-note">1인당 약 ₩723,500 · 환율 1 TWD ≈ 42 KRW</p>
+        </div>
         </div><!-- End page-checklist -->
     </div>
 
@@ -1867,9 +2014,9 @@
                 <span class="nav-icon">🍜</span>
                 <span>맛집</span>
             </button>
-            <button class="nav-item" data-page="budget">
-                <span class="nav-icon">💰</span>
-                <span>예산</span>
+            <button class="nav-item" data-page="planb">
+                <span class="nav-icon">🔄</span>
+                <span>플랜B</span>
             </button>
             <button class="nav-item" data-page="checklist">
                 <span class="nav-icon">✅</span>
@@ -1909,6 +2056,9 @@
                 { name: "六合夜市", lat: 22.6108, lng: 120.2983, desc: "관광객 야시장" },
                 { name: "瑞豐夜市", lat: 22.6700, lng: 120.2860, desc: "현지인 야시장" },
                 { name: "美麗島站 (메이리다오)", lat: 22.6273, lng: 120.3014, desc: "세계 최고 아름다운 역" },
+            ],
+            hotel: [
+                { name: "숙소 (시즈완/하마싱 근처)", lat: 22.6250, lng: 120.2750, desc: "🏨 체크인 15:00 / 체크아웃 11:00" },
             ]
         };
 
@@ -1918,14 +2068,16 @@
                 airport: '#10b981',
                 attraction: '#667eea',
                 food: '#f59e0b',
-                night: '#ec4899'
+                night: '#ec4899',
+                hotel: '#3b82f6'
             };
 
             const icons = {
                 airport: '✈️',
                 attraction: '📍',
                 food: '🍜',
-                night: '🌙'
+                night: '🌙',
+                hotel: '🏨'
             };
 
             const size = type === 'airport' ? 36 : 28;
@@ -1967,6 +2119,13 @@
 
         locations.night.forEach(loc => {
             const marker = L.marker([loc.lat, loc.lng], { icon: createIcon('night') })
+                .addTo(map)
+                .bindPopup(`<div class="popup-content"><h3>${loc.name}</h3><p>${loc.desc}</p></div>`);
+            markers.push({ marker, ...loc });
+        });
+
+        locations.hotel.forEach(loc => {
+            const marker = L.marker([loc.lat, loc.lng], { icon: createIcon('hotel') })
                 .addTo(map)
                 .bindPopup(`<div class="popup-content"><h3>${loc.name}</h3><p>${loc.desc}</p></div>`);
             markers.push({ marker, ...loc });
@@ -2136,37 +2295,152 @@
         });
 
         // ====================
-        // Budget Toggle (1인/2인)
+        // Plan B (대안 장소)
         // ====================
-        const budgetData = {
-            2: { total: 1447000, label: '2인 총 예상 비용' },
-            1: { total: 723500, label: '1인 예상 비용' }
-        };
+        const planBData = [
+            {
+                id: 'day1-lunch',
+                label: 'Day1 점심',
+                area: '시즈완/하마싱',
+                original: { name: '興隆居 (싱롱쥐)', lat: 22.6320, lng: 120.2940, desc: '딤섬, 샤오롱바오' },
+                alternatives: [
+                    { name: '老江紅茶牛奶', lat: 22.6145, lng: 120.2986, desc: '밀크티 원조, 1949년~' },
+                    { name: '楊寶寶蒸餃', lat: 22.6352, lng: 120.2865, desc: '현지인 찐만두 맛집' },
+                    { name: '鴨肉珍 (야로우젠)', lat: 22.6200, lng: 120.2850, desc: '오리국수, 50년 전통' },
+                    { name: '港園牛肉麵', lat: 22.6280, lng: 120.2900, desc: '우육면, 60년 전통' }
+                ]
+            },
+            {
+                id: 'day1-dinner',
+                label: 'Day1 저녁',
+                area: '야시장',
+                original: { name: '瑞豐夜市 (루이펑)', lat: 22.6700, lng: 120.2860, desc: '현지인 야시장, 저렴함' },
+                alternatives: [
+                    { name: '六合夜市 (리우허)', lat: 22.6108, lng: 120.2983, desc: '관광객 야시장, MRT 접근 편리' },
+                    { name: '南華觀光夜市', lat: 22.6280, lng: 120.2950, desc: '로컬 야시장' }
+                ]
+            },
+            {
+                id: 'day2-lunch',
+                label: 'Day2 점심',
+                area: '치진섬',
+                original: { name: '旗津海產街', lat: 22.6115, lng: 120.2650, desc: '해산물 거리' },
+                alternatives: [
+                    { name: '旗后活海產店', lat: 22.5850, lng: 120.2650, desc: '40년 노포, 신선 해산물' },
+                    { name: '海之冰 (하이즈빙)', lat: 22.6245, lng: 120.2640, desc: '대왕 빙수 원조' }
+                ]
+            },
+            {
+                id: 'day2-dinner',
+                label: 'Day2 저녁',
+                area: '보얼/아이허',
+                original: { name: '愛河 (아이허)', lat: 22.6085, lng: 120.2865, desc: '야경, 산책' },
+                alternatives: [
+                    { name: '駁二藝術特區', lat: 22.6120, lng: 120.2860, desc: '예술단지, 카페 거리' },
+                    { name: '鹽埕埔 골목', lat: 22.6200, lng: 120.2800, desc: '로컬 맛집 골목' }
+                ]
+            },
+            {
+                id: 'day3-lunch',
+                label: 'Day3 점심',
+                area: '연지담',
+                original: { name: '蓮池潭 주변', lat: 22.6469, lng: 120.2928, desc: '용호탑 근처' },
+                alternatives: [
+                    { name: '三牛牛肉麵', lat: 22.6450, lng: 120.2950, desc: '연지담 근처 우육면' },
+                    { name: '左營舊城 맛집골목', lat: 22.6500, lng: 120.2900, desc: '전통시장 먹거리' }
+                ]
+            }
+        ];
 
-        document.querySelectorAll('.budget-toggle button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const travelers = parseInt(btn.dataset.travelers);
+        let currentLat = null;
+        let currentLng = null;
 
-                // Update toggle buttons
-                document.querySelectorAll('.budget-toggle button').forEach(b => {
-                    b.classList.remove('active');
-                });
-                btn.classList.add('active');
+        // Haversine 거리 계산 (km)
+        function getDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
 
-                // Update total
-                const data = budgetData[travelers];
-                document.getElementById('total-amount').textContent = '₩' + data.total.toLocaleString();
-                document.getElementById('total-label').textContent = data.label;
+        // 현재 위치 가져오기
+        document.getElementById('get-location').addEventListener('click', function() {
+            const btn = this;
+            const text = document.getElementById('location-text');
 
-                // Update each item
-                document.querySelectorAll('.budget-item').forEach(item => {
-                    const krw = parseInt(item.dataset['krw' + travelers]);
-                    if (krw) {
-                        item.querySelector('.item-krw').textContent = '₩' + krw.toLocaleString();
-                    }
-                });
-            });
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 가져오는 중...';
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    currentLat = pos.coords.latitude;
+                    currentLng = pos.coords.longitude;
+                    text.textContent = `📍 ${currentLat.toFixed(4)}, ${currentLng.toFixed(4)}`;
+                    text.classList.add('success');
+                    btn.classList.remove('loading');
+                    btn.innerHTML = '<i class="fas fa-location-arrow"></i> 위치 갱신';
+                    renderPlanB();
+                },
+                (err) => {
+                    text.textContent = '⚠️ 위치 권한이 필요합니다';
+                    btn.classList.remove('loading');
+                    btn.innerHTML = '<i class="fas fa-location-arrow"></i> 다시 시도';
+                }
+            );
         });
+
+        // 플랜B 목록 렌더링
+        function renderPlanB() {
+            const timeId = document.getElementById('planb-time').value;
+            const data = planBData.find(d => d.id === timeId);
+            if (!data) return;
+
+            const allPlaces = [
+                { ...data.original, isOriginal: true },
+                ...data.alternatives.map(a => ({ ...a, isOriginal: false }))
+            ];
+
+            // 거리 계산
+            if (currentLat && currentLng) {
+                allPlaces.forEach(p => {
+                    p.distance = getDistance(currentLat, currentLng, p.lat, p.lng);
+                });
+                allPlaces.sort((a, b) => a.distance - b.distance);
+            }
+
+            // 렌더링
+            const list = document.getElementById('planb-list');
+            list.innerHTML = allPlaces.map(p => {
+                const distText = p.distance ? `${p.distance.toFixed(1)}km` : '거리 측정 필요';
+                const distClass = p.distance ? '' : 'unknown';
+                const cardClass = p.isOriginal ? 'original' : '';
+                const namePrefix = p.isOriginal ? '🎯 ' : '';
+                const mapUrl = `https://maps.google.com/?q=${p.lat},${p.lng}`;
+
+                return `
+                    <div class="planb-card ${cardClass}">
+                        <div class="planb-card-info">
+                            <div class="planb-name">${namePrefix}${p.name}</div>
+                            <div class="planb-desc">${p.desc}</div>
+                        </div>
+                        <div class="planb-card-right">
+                            <div class="planb-distance ${distClass}">${distText}</div>
+                            <a href="${mapUrl}" target="_blank" class="planb-map-btn">지도</a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 시점 변경 시 다시 렌더링
+        document.getElementById('planb-time').addEventListener('change', renderPlanB);
+
+        // 초기 렌더링
+        renderPlanB();
     </script>
 </body>
 </html>
