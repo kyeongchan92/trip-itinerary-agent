@@ -1222,8 +1222,28 @@
                 font-weight: 700;
             }
 
-            /* Food page tabs */
-            .food-tabs {
+            /* Places page styles */
+            .location-status {
+                margin-bottom: 12px;
+            }
+
+            .filter-bar {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+
+            .filter-select {
+                flex: 1;
+                padding: 10px 12px;
+                border: 2px solid #e5e7eb;
+                border-radius: 10px;
+                font-size: 0.9rem;
+                background: white;
+                color: #333;
+            }
+
+            .place-tabs {
                 display: flex;
                 gap: 10px;
                 margin-bottom: 15px;
@@ -1232,7 +1252,7 @@
                 border-radius: 12px;
             }
 
-            .food-tab {
+            .place-tab {
                 flex: 1;
                 padding: 12px 16px;
                 border: none;
@@ -1245,28 +1265,146 @@
                 color: #64748b;
             }
 
-            .food-tab.active {
+            .place-tab.active {
                 background: white;
                 color: #334155;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
 
-            .food-tab-content {
+            .place-tab-content {
                 display: none;
             }
 
-            .food-tab-content.active {
+            .place-tab-content.active {
                 display: block;
+            }
+
+            /* Place cards - compact 1-column layout */
+            .place-section {
+                background: transparent;
+                padding: 0;
+            }
+
+            .place-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .place-card {
+                padding: 12px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            }
+
+            .card-main {
+                flex: 1;
+            }
+
+            .place-card h4 {
+                font-size: 0.95rem;
+                margin: 0 0 4px 0;
+                color: #333;
+            }
+
+            .place-card h4 small {
+                font-weight: 400;
+                color: #888;
+                font-size: 0.85rem;
+            }
+
+            .card-meta {
+                font-size: 0.8rem;
+                color: #666;
+            }
+
+            .hours {
+                font-size: 0.75rem;
+                color: #10b981;
+                margin-top: 2px;
+            }
+
+            .card-right {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .distance {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: #333;
+                min-width: 50px;
+                text-align: right;
+            }
+
+            .map-btn {
+                background: #4285f4;
+                color: white;
+                padding: 6px 10px;
+                border-radius: 6px;
+                font-size: 0.75rem;
+                text-decoration: none;
+            }
+
+            /* Tips section */
+            .tips-section {
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid #e5e7eb;
+            }
+
+            .tips-section h3 {
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            .tip-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 12px;
+            }
+
+            .tip-card {
+                background: #fffbeb;
+                border: 1px solid #fcd34d;
+                border-radius: 10px;
+                padding: 15px;
+            }
+
+            .tip-card h4 {
+                font-size: 0.9rem;
+                color: #92400e;
+                margin-bottom: 10px;
+            }
+
+            .tip-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .tip-card li {
+                font-size: 0.8rem;
+                color: #666;
+                margin-bottom: 5px;
             }
         }
 
         /* Desktop: show all tab content, hide tabs */
         @media (min-width: 769px) {
-            .food-tabs {
+            .place-tabs {
                 display: none;
             }
-            .food-tab-content {
+            .place-tab-content {
                 display: block !important;
+            }
+            .filter-bar {
+                max-width: 400px;
             }
         }
     </style>
@@ -1476,7 +1614,7 @@
                             <div class="transport-detail">경전철(輕軌) → 다펑역(大公站)</div>
                             <div class="transport-time">🕐 15분 · NT$30</div>
                         </div>
-                        <div class="timeline-item night" data-lat="22.6120" data-lng="120.2860">
+                        <div class="timeline-item night" data-lat="22.6206" data-lng="120.2816">
                             <div class="timeline-time">18:00</div>
                             <div class="timeline-content">
                                 <h4>🌆 駁二藝術特區 (보얼예술특구)</h4>
@@ -1693,249 +1831,391 @@
             </div>
         </div><!-- End page-schedule -->
 
-        <!-- Food Page (Restaurant + Transport) -->
-        <div class="page" id="page-food">
+        <!-- Places Page (Restaurant + Attractions) -->
+        <div class="page" id="page-places">
 
-            <!-- Tab Navigation -->
-            <div class="food-tabs">
-                <button class="food-tab active" data-tab="restaurant">🍜 맛집</button>
-                <button class="food-tab" data-tab="transport">🚇 교통</button>
-            </div>
-
-        <!-- Restaurant Section -->
-        <div class="food-tab-content active" id="tab-restaurant">
-        <div class="restaurant-section">
-            <div class="restaurant-grid">
-                <div class="restaurant-card">
-                    <h4>興隆居 (싱롱쥐)</h4>
-                    <div class="cuisine">전통 딤섬 / 조식</div>
-                    <div class="menu">🥟 샤오롱바오, 단빙, 찐빵</div>
-                    <div class="tip">💡 아침 일찍 가면 줄이 짧아요</div>
-                    <a href="https://maps.google.com/?q=興隆居+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-                <div class="restaurant-card">
-                    <h4>老江紅茶牛奶</h4>
-                    <div class="cuisine">밀크티 전문 / 1949년~</div>
-                    <div class="menu">🧋 홍차우유, 토스트</div>
-                    <div class="tip">💡 가오슝 밀크티 원조!</div>
-                    <a href="https://maps.google.com/?q=老江紅茶牛奶+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-                <div class="restaurant-card">
-                    <h4>楊寶寶蒸餃</h4>
-                    <div class="cuisine">찐만두 전문</div>
-                    <div class="menu">🥟 찐만두 10개 + 완탕탕</div>
-                    <div class="tip">💡 현지인 줄서는 찐맛집</div>
-                    <a href="https://maps.google.com/?q=楊寶寶蒸餃+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-                <div class="restaurant-card">
-                    <h4>鴨肉珍 (야로우젠)</h4>
-                    <div class="cuisine">오리요리 / 50년 전통</div>
-                    <div class="menu">🦆 오리국수, 오리덮밥</div>
-                    <div class="tip">💡 점심시간 피크 피하기</div>
-                    <a href="https://maps.google.com/?q=鴨肉珍+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-                <div class="restaurant-card">
-                    <h4>旗津 해산물거리</h4>
-                    <div class="cuisine">해산물 / 치진섬</div>
-                    <div class="menu">🦐 새우, 조개, 생선구이</div>
-                    <div class="tip">💡 가격 흥정 필수! 현금 준비</div>
-                    <a href="https://maps.google.com/?q=旗津海產街+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-                <div class="restaurant-card">
-                    <h4>度小月 (두샤오웨)</h4>
-                    <div class="cuisine">단짜이미엔 원조</div>
-                    <div class="menu">🍜 담백한 국수, 루러우판</div>
-                    <div class="tip">💡 대만 전역 체인이지만 맛있음</div>
-                    <a href="https://maps.google.com/?q=度小月+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
-                </div>
-            </div>
-        </div>
-        </div><!-- End tab-restaurant -->
-
-        <!-- Transportation Section -->
-        <div class="food-tab-content" id="tab-transport">
-        <div class="transport-section">
-            <div class="transport-grid">
-                <div class="transport-card recommended">
-                    <h4><i class="fas fa-train"></i> MRT (지하철)</h4>
-                    <div class="price">💰 1회권 NT$20-65 / 1일권 NT$180</div>
-                    <div class="desc">
-                        가오슝 여행의 핵심 교통수단!<br>
-                        레드라인 & 오렌지라인 2개 노선
-                    </div>
-                    <div class="routes">
-                        <strong>주요 역:</strong><br>
-                        🔴 공항 → 메이리다오 → 시즈완<br>
-                        🟠 메이리다오 → 연지담 → 삼봉궁
-                    </div>
-                    <div class="tip">💡 이지카드(悠遊卡) 구매 추천! 편의점에서 충전 가능</div>
-                </div>
-
-                <div class="transport-card recommended">
-                    <h4><i class="fas fa-tram"></i> 경전철 (Light Rail)</h4>
-                    <div class="price">💰 1회 NT$30 / 이지카드 사용가능</div>
-                    <div class="desc">
-                        항구 주변 순환 노선<br>
-                        보얼예술특구, 시즈완 구간 편리
-                    </div>
-                    <div class="routes">
-                        🚃 시즈완 ↔ 보얼예술특구 ↔ 포르모사대로
-                    </div>
-                    <div class="tip">💡 바다 보며 이동, 야경 시간대 추천!</div>
-                </div>
-
-                <div class="transport-card">
-                    <h4><i class="fas fa-ship"></i> 페리 (Ferry)</h4>
-                    <div class="price">💰 편도 NT$40 (약 1,700원)</div>
-                    <div class="desc">
-                        치진섬 가는 유일한 방법!<br>
-                        구산 페리터미널 → 치진섬 (10분)
-                    </div>
-                    <div class="routes">
-                        ⛴️ 구산역 1번출구 → 도보 5분 → 페리터미널
-                    </div>
-                    <div class="tip">💡 이지카드로 탑승 가능, 배 안에서 바다 사진 찍기!</div>
-                </div>
-
-                <div class="transport-card">
-                    <h4><i class="fas fa-bicycle"></i> YouBike (공유자전거)</h4>
-                    <div class="price">💰 30분 NT$10 (약 420원)</div>
-                    <div class="desc">
-                        치진섬, 연지담 주변 산책에 최고!<br>
-                        앱 등록 필요 (신용카드)
-                    </div>
-                    <div class="routes">
-                        🚲 치진섬 일주 / 연지담 호수길 추천
-                    </div>
-                    <div class="tip">💡 치진섬은 자전거가 도보보다 훨씬 편함!</div>
-                </div>
-
-                <div class="transport-card">
-                    <h4><i class="fas fa-taxi"></i> 택시 / Uber</h4>
-                    <div class="price">💰 기본 NT$85 + 거리당 추가</div>
-                    <div class="desc">
-                        야간/짐 많을 때 유용<br>
-                        Uber 앱 사용 가능
-                    </div>
-                    <div class="routes">
-                        🚕 공항 → 시내 약 NT$350-400
-                    </div>
-                    <div class="tip">💡 호텔에서 택시 불러달라고 하면 편함</div>
-                </div>
-
-                <div class="transport-card">
-                    <h4><i class="fas fa-bus"></i> 시내버스</h4>
-                    <div class="price">💰 1회 NT$12-48</div>
-                    <div class="desc">
-                        MRT 안 닿는 곳 갈 때<br>
-                        루이펑야시장 등
-                    </div>
-                    <div class="routes">
-                        🚌 구글맵으로 버스 노선 검색 추천
-                    </div>
-                    <div class="tip">💡 MRT로 대부분 커버 가능해서 자주 안 씀</div>
-                </div>
-            </div>
-
-            <!-- Recommended Routes -->
-            <div class="route-section">
-                <h3>📍 일정별 추천 이동 경로</h3>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>공항 → 호텔 (메이리다오역)</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-train"></i> MRT 레드라인
-                    </div>
-                    <div class="route-time">⏱️ 25분, NT$60</div>
-                </div>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>메이리다오 → 연지담</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-train"></i> MRT 레드→오렌지 환승
-                    </div>
-                    <div class="route-time">⏱️ 20분, NT$35</div>
-                </div>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>메이리다오 → 치진섬</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-train"></i> MRT + <i class="fas fa-ship"></i> 페리
-                    </div>
-                    <div class="route-time">⏱️ 35분, NT$75</div>
-                </div>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>치진섬 → 시즈완</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-ship"></i> 페리 + <i class="fas fa-walking"></i> 도보
-                    </div>
-                    <div class="route-time">⏱️ 20분, NT$40</div>
-                </div>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>시즈완 → 보얼예술특구 → 포르모사대로</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-tram"></i> 경전철
-                    </div>
-                    <div class="route-time">⏱️ 15분, NT$30</div>
-                </div>
-
-                <div class="route-item">
-                    <div class="route-from-to">
-                        <strong>메이리다오 → 루이펑야시장</strong>
-                    </div>
-                    <div class="route-method">
-                        <i class="fas fa-taxi"></i> 택시/Uber
-                    </div>
-                    <div class="route-time">⏱️ 10분, NT$120</div>
-                </div>
-            </div>
-        </div>
-        </div><!-- End tab-transport -->
-        </div><!-- End page-food -->
-
-        <!-- Plan B Page -->
-        <div class="page" id="page-planb">
-            <div class="planb-header">
-                <h2>🔄 플랜B 대안</h2>
-                <p>현재 위치에서 각 장소까지 거리를 비교해보세요</p>
-            </div>
-
-            <!-- Location Status -->
+            <!-- Location Status (GPS) -->
             <div class="location-status">
                 <button id="get-location" class="location-btn">
-                    <i class="fas fa-location-arrow"></i> 현재 위치 가져오기
+                    <i class="fas fa-location-arrow"></i> 현재 위치
                 </button>
                 <span id="location-text">위치 정보 없음</span>
             </div>
 
-            <!-- Time Slot Selection -->
-            <div class="planb-select-wrapper">
-                <select id="planb-time" class="planb-select">
-                    <option value="day1-lunch">Day1 점심 (시즈완/하마싱)</option>
-                    <option value="day1-dinner">Day1 저녁 (루이펑 야시장)</option>
-                    <option value="day2-lunch">Day2 점심 (치진섬)</option>
-                    <option value="day2-dinner">Day2 저녁 (보얼/아이허)</option>
-                    <option value="day3-lunch">Day3 점심 (연지담)</option>
+            <!-- Filters -->
+            <div class="filter-bar">
+                <select id="filter-area" class="filter-select">
+                    <option value="all">📍 전체 지역</option>
+                    <option value="hamasin">하마싱</option>
+                    <option value="sizwan">시즈완</option>
+                    <option value="cijin">치진섬</option>
+                    <option value="boer">보얼</option>
+                    <option value="ruifeng">루이펑</option>
+                    <option value="yeonjidam">연지담</option>
+                </select>
+                <select id="filter-category" class="filter-select">
+                    <option value="all">🍽️ 전체 종류</option>
+                    <option value="dimsum">딤섬</option>
+                    <option value="noodle">면류</option>
+                    <option value="seafood">해산물</option>
+                    <option value="dessert">디저트</option>
+                    <option value="nightmarket">야시장</option>
                 </select>
             </div>
 
-            <!-- Plan B List -->
-            <div class="planb-list" id="planb-list">
-                <!-- Rendered by JavaScript -->
+            <!-- Tab Navigation -->
+            <div class="place-tabs">
+                <button class="place-tab active" data-tab="food">🍜 맛집</button>
+                <button class="place-tab" data-tab="attraction">🏛️ 명소</button>
             </div>
-        </div><!-- End page-planb -->
+
+        <!-- Food Tab Content -->
+        <div class="place-tab-content active" id="tab-food">
+        <div class="place-section">
+            <div class="place-grid">
+                <div class="place-card" data-area="hamasin" data-category="dimsum" data-lat="22.6320" data-lng="120.2940">
+                    <div class="card-main">
+                        <h4>興隆居 <small>(싱롱쥐)</small></h4>
+                        <div class="card-meta">🥟 딤섬 · 📍하마싱</div>
+                        <div class="hours">⏰ 05:30-12:30</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6320,120.2940" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="dessert" data-lat="22.6145" data-lng="120.2986">
+                    <div class="card-main">
+                        <h4>老江紅茶牛奶 <small>(라오장)</small></h4>
+                        <div class="card-meta">🧋 음료 · 📍하마싱</div>
+                        <div class="hours">⏰ 06:00-23:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6145,120.2986" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="dimsum" data-lat="22.6352" data-lng="120.2865">
+                    <div class="card-main">
+                        <h4>楊寶寶蒸餃 <small>(양바오바오)</small></h4>
+                        <div class="card-meta">🥟 딤섬 · 📍하마싱</div>
+                        <div class="hours">⏰ 10:00-20:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6352,120.2865" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="noodle" data-lat="22.6200" data-lng="120.2850">
+                    <div class="card-main">
+                        <h4>鴨肉珍 <small>(야로우젠)</small></h4>
+                        <div class="card-meta">🦆 면류 · 📍하마싱</div>
+                        <div class="hours">⏰ 09:00-20:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6200,120.2850" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="cijin" data-category="seafood" data-lat="22.6115" data-lng="120.2650">
+                    <div class="card-main">
+                        <h4>旗津海產街 <small>(치진 해산물거리)</small></h4>
+                        <div class="card-meta">🦐 해산물 · 📍치진섬</div>
+                        <div class="hours">⏰ 11:00-21:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6115,120.2650" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="boer" data-category="noodle" data-lat="22.6200" data-lng="120.2800">
+                    <div class="card-main">
+                        <h4>度小月 <small>(두샤오웨)</small></h4>
+                        <div class="card-meta">🍜 면류 · 📍보얼</div>
+                        <div class="hours">⏰ 11:00-21:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6200,120.2800" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="ruifeng" data-category="nightmarket" data-lat="22.6700" data-lng="120.2860">
+                    <div class="card-main">
+                        <h4>瑞豐夜市 <small>(루이펑)</small></h4>
+                        <div class="card-meta">🌙 야시장 · 📍루이펑</div>
+                        <div class="hours">⏰ 17:00-00:00 (화목휴무)</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6700,120.2860" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="nightmarket" data-lat="22.6108" data-lng="120.2983">
+                    <div class="card-main">
+                        <h4>六合夜市 <small>(리우허)</small></h4>
+                        <div class="card-meta">🌙 야시장 · 📍하마싱</div>
+                        <div class="hours">⏰ 17:00-02:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6108,120.2983" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- End tab-food -->
+
+        <!-- Attractions Tab Content -->
+        <div class="place-tab-content" id="tab-attraction">
+        <div class="place-section">
+            <div class="place-grid">
+                <div class="place-card" data-area="sizwan" data-category="attraction" data-lat="22.6245" data-lng="120.2656">
+                    <div class="card-main">
+                        <h4>西子灣 <small>(시즈완)</small></h4>
+                        <div class="card-meta">🌅 명소 · 📍시즈완</div>
+                        <div class="hours">⏰ 24시간 (석양 추천)</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6245,120.2656" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="yeonjidam" data-category="attraction" data-lat="22.6469" data-lng="120.2928">
+                    <div class="card-main">
+                        <h4>蓮池潭 <small>(연지담)</small></h4>
+                        <div class="card-meta">🏛️ 명소 · 📍연지담</div>
+                        <div class="hours">⏰ 24시간</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6469,120.2928" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="cijin" data-category="attraction" data-lat="22.6120" data-lng="120.2630">
+                    <div class="card-main">
+                        <h4>旗津島 <small>(치진섬)</small></h4>
+                        <div class="card-meta">🏝️ 명소 · 📍치진섬</div>
+                        <div class="hours">⏰ 24시간</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6120,120.2630" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="boer" data-category="attraction" data-lat="22.6206" data-lng="120.2816">
+                    <div class="card-main">
+                        <h4>駁二藝術特區 <small>(보얼예술특구)</small></h4>
+                        <div class="card-meta">🎨 예술 · 📍보얼</div>
+                        <div class="hours">⏰ 10:00-21:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6206,120.2816" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="attraction" data-lat="22.6316" data-lng="120.3014">
+                    <div class="card-main">
+                        <h4>美麗島站 <small>(메이리다오역)</small></h4>
+                        <div class="card-meta">🚇 명소 · 📍하마싱</div>
+                        <div class="hours">⏰ 06:00-00:00</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6316,120.3014" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+                <div class="place-card" data-area="hamasin" data-category="nightview" data-lat="22.6085" data-lng="120.2865">
+                    <div class="card-main">
+                        <h4>愛河 <small>(아이허)</small></h4>
+                        <div class="card-meta">🌃 야경 · 📍하마싱</div>
+                        <div class="hours">⏰ 24시간 (야간 추천)</div>
+                    </div>
+                    <div class="card-right">
+                        <div class="distance" data-dist>-</div>
+                        <a href="https://maps.google.com/?q=22.6085,120.2865" target="_blank" class="map-btn">지도</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- End tab-attraction -->
+        </div><!-- End page-places -->
+
+        <!-- Transport Page -->
+        <div class="page" id="page-transport">
+            <div class="transport-section">
+                <div class="transport-grid">
+                    <div class="transport-card recommended">
+                        <h4><i class="fas fa-train"></i> MRT (지하철)</h4>
+                        <div class="price">💰 1회권 NT$20-65 / 1일권 NT$180</div>
+                        <div class="desc">
+                            가오슝 여행의 핵심 교통수단!<br>
+                            레드라인 & 오렌지라인 2개 노선
+                        </div>
+                        <div class="routes">
+                            <strong>주요 역:</strong><br>
+                            🔴 공항 → 메이리다오 → 시즈완<br>
+                            🟠 메이리다오 → 연지담 → 삼봉궁
+                        </div>
+                    </div>
+
+                    <div class="transport-card recommended">
+                        <h4><i class="fas fa-tram"></i> 경전철 (Light Rail)</h4>
+                        <div class="price">💰 1회 NT$30 / 이지카드 사용가능</div>
+                        <div class="desc">
+                            항구 주변 순환 노선<br>
+                            보얼예술특구, 시즈완 구간 편리
+                        </div>
+                        <div class="routes">
+                            🚃 시즈완 ↔ 보얼예술특구 ↔ 포르모사대로
+                        </div>
+                    </div>
+
+                    <div class="transport-card">
+                        <h4><i class="fas fa-ship"></i> 페리 (Ferry)</h4>
+                        <div class="price">💰 편도 NT$40 (약 1,700원)</div>
+                        <div class="desc">
+                            치진섬 가는 유일한 방법!<br>
+                            구산 페리터미널 → 치진섬 (10분)
+                        </div>
+                        <div class="routes">
+                            ⛴️ 구산역 1번출구 → 도보 5분 → 페리터미널
+                        </div>
+                    </div>
+
+                    <div class="transport-card">
+                        <h4><i class="fas fa-bicycle"></i> YouBike (공유자전거)</h4>
+                        <div class="price">💰 30분 NT$10 (약 420원)</div>
+                        <div class="desc">
+                            치진섬, 연지담 주변 산책에 최고!<br>
+                            앱 등록 필요 (신용카드)
+                        </div>
+                        <div class="routes">
+                            🚲 치진섬 일주 / 연지담 호수길 추천
+                        </div>
+                    </div>
+
+                    <div class="transport-card">
+                        <h4><i class="fas fa-taxi"></i> 택시 / Uber</h4>
+                        <div class="price">💰 기본 NT$85 + 거리당 추가</div>
+                        <div class="desc">
+                            야간/짐 많을 때 유용<br>
+                            Uber 앱 사용 가능
+                        </div>
+                        <div class="routes">
+                            🚕 공항 → 시내 약 NT$350-400
+                        </div>
+                    </div>
+
+                    <div class="transport-card">
+                        <h4><i class="fas fa-bus"></i> 시내버스</h4>
+                        <div class="price">💰 1회 NT$12-48</div>
+                        <div class="desc">
+                            MRT 안 닿는 곳 갈 때<br>
+                            루이펑야시장 등
+                        </div>
+                        <div class="routes">
+                            🚌 구글맵으로 버스 노선 검색 추천
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 팁 섹션 -->
+                <div class="tips-section">
+                    <h3>💡 팁</h3>
+                    <div class="tip-grid">
+                        <div class="tip-card">
+                            <h4>🎫 이카통 (一卡通) 구매</h4>
+                            <ul>
+                                <li>📍 MRT역 자동판매기 (NT$100 + 충전금)</li>
+                                <li>📍 편의점 (7-11, 전가복)</li>
+                                <li>💡 공항 도착 후 바로 구매 추천</li>
+                            </ul>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔋 충전 방법</h4>
+                            <ul>
+                                <li>📍 MRT역 충전기 (현금/카드)</li>
+                                <li>📍 편의점 카운터</li>
+                                <li>💰 NT$100 단위로 충전</li>
+                            </ul>
+                        </div>
+                        <div class="tip-card">
+                            <h4>💵 요금 절약</h4>
+                            <ul>
+                                <li>🚇 MRT+버스 환승 할인</li>
+                                <li>🚢 페리도 이카통 사용 가능</li>
+                                <li>📱 가오슝 MRT 앱 설치 추천</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 추천 이동 경로 -->
+                <div class="route-section">
+                    <h3>📍 일정별 추천 이동 경로</h3>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>공항 → 호텔 (메이리다오역)</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-train"></i> MRT 레드라인
+                        </div>
+                        <div class="route-time">⏱️ 25분, NT$60</div>
+                    </div>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>메이리다오 → 연지담</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-train"></i> MRT 레드→오렌지 환승
+                        </div>
+                        <div class="route-time">⏱️ 20분, NT$35</div>
+                    </div>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>메이리다오 → 치진섬</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-train"></i> MRT + <i class="fas fa-ship"></i> 페리
+                        </div>
+                        <div class="route-time">⏱️ 35분, NT$75</div>
+                    </div>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>치진섬 → 시즈완</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-ship"></i> 페리 + <i class="fas fa-walking"></i> 도보
+                        </div>
+                        <div class="route-time">⏱️ 20분, NT$40</div>
+                    </div>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>시즈완 → 보얼예술특구 → 포르모사대로</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-tram"></i> 경전철
+                        </div>
+                        <div class="route-time">⏱️ 15분, NT$30</div>
+                    </div>
+
+                    <div class="route-item">
+                        <div class="route-from-to">
+                            <strong>메이리다오 → 루이펑야시장</strong>
+                        </div>
+                        <div class="route-method">
+                            <i class="fas fa-taxi"></i> 택시/Uber
+                        </div>
+                        <div class="route-time">⏱️ 10분, NT$120</div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End page-transport -->
 
         <!-- Checklist Page -->
         <div class="page" id="page-checklist">
@@ -2010,13 +2290,13 @@
                 <span class="nav-icon">📅</span>
                 <span>일정</span>
             </button>
-            <button class="nav-item" data-page="food">
-                <span class="nav-icon">🍜</span>
-                <span>맛집</span>
+            <button class="nav-item" data-page="places">
+                <span class="nav-icon">📍</span>
+                <span>장소</span>
             </button>
-            <button class="nav-item" data-page="planb">
-                <span class="nav-icon">🔄</span>
-                <span>플랜B</span>
+            <button class="nav-item" data-page="transport">
+                <span class="nav-icon">🚇</span>
+                <span>교통</span>
             </button>
             <button class="nav-item" data-page="checklist">
                 <span class="nav-icon">✅</span>
@@ -2043,7 +2323,7 @@
                 { name: "蓮池潭 (연지담)", lat: 22.6469, lng: 120.2928, desc: "용호탑, 춘추각, 호수 산책" },
                 { name: "旗津島 (치진섬)", lat: 22.6120, lng: 120.2630, desc: "등대, 해변, 해산물" },
                 { name: "西子灣 (시즈완)", lat: 22.6245, lng: 120.2656, desc: "영국 영사관, 석양 명소" },
-                { name: "駁二藝術特區 (보얼예술특구)", lat: 22.6120, lng: 120.2860, desc: "예술 단지, 벽화 거리" },
+                { name: "駁二藝術特區 (보얼예술특구)", lat: 22.6206, lng: 120.2816, desc: "예술 단지, 벽화 거리" },
                 { name: "三鳳宮 (삼봉궁)", lat: 22.6550, lng: 120.3010, desc: "대만 최대 사원" },
             ],
             food: [
@@ -2278,80 +2558,25 @@
         initMobilePages();
 
         // ====================
-        // Food Page Tabs (맛집/교통)
+        // Places Page Tabs (맛집/명소)
         // ====================
-        document.querySelectorAll('.food-tab').forEach(tab => {
+        document.querySelectorAll('.place-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const tabId = tab.dataset.tab;
 
                 // Update tab buttons
-                document.querySelectorAll('.food-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.place-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
 
                 // Update tab content
-                document.querySelectorAll('.food-tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.place-tab-content').forEach(c => c.classList.remove('active'));
                 document.getElementById('tab-' + tabId).classList.add('active');
             });
         });
 
         // ====================
-        // Plan B (대안 장소)
+        // GPS Location & Distance
         // ====================
-        const planBData = [
-            {
-                id: 'day1-lunch',
-                label: 'Day1 점심',
-                area: '시즈완/하마싱',
-                original: { name: '興隆居 (싱롱쥐)', lat: 22.6320, lng: 120.2940, desc: '딤섬, 샤오롱바오' },
-                alternatives: [
-                    { name: '老江紅茶牛奶', lat: 22.6145, lng: 120.2986, desc: '밀크티 원조, 1949년~' },
-                    { name: '楊寶寶蒸餃', lat: 22.6352, lng: 120.2865, desc: '현지인 찐만두 맛집' },
-                    { name: '鴨肉珍 (야로우젠)', lat: 22.6200, lng: 120.2850, desc: '오리국수, 50년 전통' },
-                    { name: '港園牛肉麵', lat: 22.6280, lng: 120.2900, desc: '우육면, 60년 전통' }
-                ]
-            },
-            {
-                id: 'day1-dinner',
-                label: 'Day1 저녁',
-                area: '야시장',
-                original: { name: '瑞豐夜市 (루이펑)', lat: 22.6700, lng: 120.2860, desc: '현지인 야시장, 저렴함' },
-                alternatives: [
-                    { name: '六合夜市 (리우허)', lat: 22.6108, lng: 120.2983, desc: '관광객 야시장, MRT 접근 편리' },
-                    { name: '南華觀光夜市', lat: 22.6280, lng: 120.2950, desc: '로컬 야시장' }
-                ]
-            },
-            {
-                id: 'day2-lunch',
-                label: 'Day2 점심',
-                area: '치진섬',
-                original: { name: '旗津海產街', lat: 22.6115, lng: 120.2650, desc: '해산물 거리' },
-                alternatives: [
-                    { name: '旗后活海產店', lat: 22.5850, lng: 120.2650, desc: '40년 노포, 신선 해산물' },
-                    { name: '海之冰 (하이즈빙)', lat: 22.6245, lng: 120.2640, desc: '대왕 빙수 원조' }
-                ]
-            },
-            {
-                id: 'day2-dinner',
-                label: 'Day2 저녁',
-                area: '보얼/아이허',
-                original: { name: '愛河 (아이허)', lat: 22.6085, lng: 120.2865, desc: '야경, 산책' },
-                alternatives: [
-                    { name: '駁二藝術特區', lat: 22.6120, lng: 120.2860, desc: '예술단지, 카페 거리' },
-                    { name: '鹽埕埔 골목', lat: 22.6200, lng: 120.2800, desc: '로컬 맛집 골목' }
-                ]
-            },
-            {
-                id: 'day3-lunch',
-                label: 'Day3 점심',
-                area: '연지담',
-                original: { name: '蓮池潭 주변', lat: 22.6469, lng: 120.2928, desc: '용호탑 근처' },
-                alternatives: [
-                    { name: '三牛牛肉麵', lat: 22.6450, lng: 120.2950, desc: '연지담 근처 우육면' },
-                    { name: '左營舊城 맛집골목', lat: 22.6500, lng: 120.2900, desc: '전통시장 먹거리' }
-                ]
-            }
-        ];
-
         let currentLat = null;
         let currentLng = null;
 
@@ -2365,6 +2590,20 @@
                       Math.sin(dLng/2) * Math.sin(dLng/2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             return R * c;
+        }
+
+        // 카드 거리 업데이트
+        function updateCardDistances() {
+            document.querySelectorAll('.place-card').forEach(card => {
+                const lat = parseFloat(card.dataset.lat);
+                const lng = parseFloat(card.dataset.lng);
+                const distEl = card.querySelector('.distance');
+
+                if (currentLat && currentLng && lat && lng) {
+                    const dist = getDistance(currentLat, currentLng, lat, lng);
+                    distEl.textContent = dist.toFixed(1) + 'km';
+                }
+            });
         }
 
         // 현재 위치 가져오기
@@ -2383,7 +2622,7 @@
                     text.classList.add('success');
                     btn.classList.remove('loading');
                     btn.innerHTML = '<i class="fas fa-location-arrow"></i> 위치 갱신';
-                    renderPlanB();
+                    updateCardDistances();
                 },
                 (err) => {
                     text.textContent = '⚠️ 위치 권한이 필요합니다';
@@ -2393,54 +2632,26 @@
             );
         });
 
-        // 플랜B 목록 렌더링
-        function renderPlanB() {
-            const timeId = document.getElementById('planb-time').value;
-            const data = planBData.find(d => d.id === timeId);
-            if (!data) return;
+        // ====================
+        // Filter Functionality
+        // ====================
+        function filterPlaces() {
+            const area = document.getElementById('filter-area').value;
+            const category = document.getElementById('filter-category').value;
 
-            const allPlaces = [
-                { ...data.original, isOriginal: true },
-                ...data.alternatives.map(a => ({ ...a, isOriginal: false }))
-            ];
+            document.querySelectorAll('.place-card').forEach(card => {
+                const cardArea = card.dataset.area;
+                const cardCategory = card.dataset.category;
 
-            // 거리 계산
-            if (currentLat && currentLng) {
-                allPlaces.forEach(p => {
-                    p.distance = getDistance(currentLat, currentLng, p.lat, p.lng);
-                });
-                allPlaces.sort((a, b) => a.distance - b.distance);
-            }
+                const matchArea = area === 'all' || cardArea === area;
+                const matchCategory = category === 'all' || cardCategory === category;
 
-            // 렌더링
-            const list = document.getElementById('planb-list');
-            list.innerHTML = allPlaces.map(p => {
-                const distText = p.distance ? `${p.distance.toFixed(1)}km` : '거리 측정 필요';
-                const distClass = p.distance ? '' : 'unknown';
-                const cardClass = p.isOriginal ? 'original' : '';
-                const namePrefix = p.isOriginal ? '🎯 ' : '';
-                const mapUrl = `https://maps.google.com/?q=${p.lat},${p.lng}`;
-
-                return `
-                    <div class="planb-card ${cardClass}">
-                        <div class="planb-card-info">
-                            <div class="planb-name">${namePrefix}${p.name}</div>
-                            <div class="planb-desc">${p.desc}</div>
-                        </div>
-                        <div class="planb-card-right">
-                            <div class="planb-distance ${distClass}">${distText}</div>
-                            <a href="${mapUrl}" target="_blank" class="planb-map-btn">지도</a>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                card.style.display = (matchArea && matchCategory) ? '' : 'none';
+            });
         }
 
-        // 시점 변경 시 다시 렌더링
-        document.getElementById('planb-time').addEventListener('change', renderPlanB);
-
-        // 초기 렌더링
-        renderPlanB();
+        document.getElementById('filter-area').addEventListener('change', filterPlaces);
+        document.getElementById('filter-category').addEventListener('change', filterPlaces);
     </script>
 </body>
 </html>
