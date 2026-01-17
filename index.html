@@ -981,8 +981,8 @@
             }
 
             #page-schedule #map {
-                height: 35vh;
-                min-height: 200px;
+                height: 25vh;
+                min-height: 150px;
             }
 
             #page-schedule .schedule-section {
@@ -2037,9 +2037,8 @@
             }
         }
 
-        // Handle resize
+        // Handle resize - only resize map, don't reset page
         window.addEventListener('resize', () => {
-            initMobilePages();
             map.invalidateSize();
         });
 
