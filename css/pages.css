@@ -1,0 +1,354 @@
+/* ==================== */
+/* Mobile Styles */
+/* ==================== */
+@media (max-width: 768px) {
+    /* Show bottom nav */
+    .bottom-nav {
+        display: block;
+    }
+
+    .container {
+        padding-bottom: 90px;
+    }
+
+    /* Header */
+    .header {
+        padding: 20px 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .trip-info {
+        gap: 8px;
+    }
+
+    .trip-info-item {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    /* Flight cards - stack vertically */
+    .header > div:last-child {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header > div:last-child > div {
+        width: 100%;
+    }
+
+    /* Map */
+    #map {
+        height: 280px;
+    }
+
+    .map-legend {
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .legend-item {
+        font-size: 0.8rem;
+    }
+
+    /* Main content */
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Schedule */
+    .day-tab {
+        padding: 10px 5px;
+        font-size: 0.85rem;
+    }
+
+    .day-tab small {
+        font-size: 0.65rem;
+    }
+
+    .timeline-container {
+        max-height: none;
+        padding: 15px;
+    }
+
+    .timeline-item {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .timeline-time {
+        min-width: 50px;
+        font-size: 0.9rem;
+    }
+
+    .timeline-content h4 {
+        font-size: 0.95rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.8rem;
+    }
+
+    .timeline-transport {
+        margin-left: 20px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    /* Restaurant */
+    .restaurant-section {
+        padding: 20px 15px;
+    }
+
+    .restaurant-section h2 {
+        font-size: 1.1rem;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Transport */
+    .transport-section {
+        padding: 20px 15px;
+    }
+
+    .transport-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .route-item {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    /* Budget */
+    .budget-section {
+        padding: 20px 15px;
+    }
+
+    .budget-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .budget-total .total-amount {
+        font-size: 2rem;
+    }
+
+    .budget-items {
+        grid-template-columns: 1fr;
+    }
+
+    /* Packing */
+    .packing-section {
+        padding: 20px 15px;
+    }
+
+    .packing-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .packing-category h4 {
+        font-size: 0.85rem;
+    }
+
+    .packing-category li {
+        font-size: 0.8rem;
+        padding: 6px 0;
+    }
+
+    /* Page system for mobile */
+    .page {
+        display: none;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    /* Schedule page: map + timeline stacked */
+    #page-schedule .map-section {
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    #page-schedule #map {
+        height: 25vh;
+        min-height: 150px;
+    }
+
+    #page-schedule .schedule-section {
+        border-radius: 12px;
+    }
+
+    #page-schedule .timeline-container {
+        max-height: 45vh;
+    }
+
+    /* Mini header for non-home pages */
+    .page-title {
+        display: none;
+    }
+
+    .page:not(#page-home) .page-title {
+        display: block;
+        background: white;
+        color: #333;
+        padding: 15px 20px;
+        margin: -20px -15px 15px -15px;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .page-title h3 {
+        font-size: 1.1rem;
+        margin: 0;
+        font-weight: 700;
+    }
+
+    /* Places page styles */
+    .location-status {
+        margin-bottom: 12px;
+    }
+
+    .place-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        background: #f1f5f9;
+        padding: 5px;
+        border-radius: 12px;
+    }
+
+    .place-tab {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: #64748b;
+    }
+
+    .place-tab.active {
+        background: white;
+        color: #334155;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .place-tab-content {
+        display: none;
+    }
+
+    .place-tab-content.active {
+        display: block;
+    }
+
+    /* Place cards - compact 1-column layout */
+    .place-section {
+        background: transparent;
+        padding: 0;
+    }
+
+    .place-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .place-card {
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .card-main {
+        flex: 1;
+    }
+
+    .place-card h4 {
+        font-size: 0.95rem;
+        margin: 0 0 4px 0;
+        color: #333;
+    }
+
+    .place-card h4 small {
+        font-weight: 400;
+        color: #888;
+        font-size: 0.85rem;
+    }
+
+    .card-meta {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    .hours {
+        font-size: 0.75rem;
+        color: #10b981;
+        margin-top: 2px;
+    }
+
+    .card-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .distance {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #333;
+        min-width: 50px;
+        text-align: right;
+    }
+
+    /* Tips section */
+    .tips-section {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .tips-section h3 {
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .tip-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+    }
+}
+
+/* Desktop: show all tab content, hide tabs */
+@media (min-width: 769px) {
+    .place-tabs {
+        display: none;
+    }
+    .place-tab-content {
+        display: block !important;
+    }
+    .filter-bar {
+        max-width: 400px;
+    }
+}
