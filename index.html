@@ -226,6 +226,17 @@
             font-size: 0.8rem;
             color: #0369a1;
             border-left: 3px solid #0ea5e9;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .timeline-transport:hover {
+            background: linear-gradient(90deg, #bae6fd 0%, #e0f2fe 100%);
+            transform: translateX(3px);
+        }
+
+        .timeline-transport:active {
+            transform: translateX(1px);
         }
 
         .timeline-transport i {
@@ -240,6 +251,12 @@
             font-weight: 600;
             color: #0ea5e9;
             white-space: nowrap;
+        }
+
+        .timeline-transport .route-link {
+            font-size: 0.7rem;
+            color: #4285f4;
+            margin-left: 5px;
         }
 
         .timeline-content h4 {
@@ -2652,6 +2669,37 @@
 
         document.getElementById('filter-area').addEventListener('change', filterPlaces);
         document.getElementById('filter-category').addEventListener('change', filterPlaces);
+
+        // ====================
+        // Transport Click → Google Maps Directions
+        // ====================
+        document.querySelectorAll('.timeline-transport').forEach(transport => {
+            transport.addEventListener('click', () => {
+                // 이전 timeline-item (출발지)
+                let prevItem = transport.previousElementSibling;
+                while (prevItem && !prevItem.classList.contains('timeline-item')) {
+                    prevItem = prevItem.previousElementSibling;
+                }
+
+                // 다음 timeline-item (도착지)
+                let nextItem = transport.nextElementSibling;
+                while (nextItem && !nextItem.classList.contains('timeline-item')) {
+                    nextItem = nextItem.nextElementSibling;
+                }
+
+                if (prevItem && nextItem) {
+                    const originLat = prevItem.dataset.lat;
+                    const originLng = prevItem.dataset.lng;
+                    const destLat = nextItem.dataset.lat;
+                    const destLng = nextItem.dataset.lng;
+
+                    if (originLat && originLng && destLat && destLng) {
+                        const url = `https://www.google.com/maps/dir/?api=1&origin=${originLat},${originLng}&destination=${destLat},${destLng}&travelmode=transit`;
+                        window.open(url, '_blank');
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
