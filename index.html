@@ -328,6 +328,22 @@
             font-style: italic;
         }
 
+        .restaurant-card .map-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .restaurant-card .map-link:active {
+            background: #3367d6;
+        }
+
         /* Custom Marker */
         .custom-marker {
             background: #667eea;
@@ -1495,43 +1511,48 @@
         <!-- Restaurant Section -->
         <div class="food-tab-content active" id="tab-restaurant">
         <div class="restaurant-section">
-            <h2><i class="fas fa-utensils" style="color: #f59e0b;"></i> 가오슝 필수 맛집 리스트</h2>
             <div class="restaurant-grid">
                 <div class="restaurant-card">
                     <h4>興隆居 (싱롱쥐)</h4>
                     <div class="cuisine">전통 딤섬 / 조식</div>
                     <div class="menu">🥟 샤오롱바오, 단빙, 찐빵</div>
                     <div class="tip">💡 아침 일찍 가면 줄이 짧아요</div>
+                    <a href="https://maps.google.com/?q=興隆居+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
                 <div class="restaurant-card">
                     <h4>老江紅茶牛奶</h4>
                     <div class="cuisine">밀크티 전문 / 1949년~</div>
                     <div class="menu">🧋 홍차우유, 토스트</div>
                     <div class="tip">💡 가오슝 밀크티 원조!</div>
+                    <a href="https://maps.google.com/?q=老江紅茶牛奶+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
                 <div class="restaurant-card">
                     <h4>楊寶寶蒸餃</h4>
                     <div class="cuisine">찐만두 전문</div>
                     <div class="menu">🥟 찐만두 10개 + 완탕탕</div>
                     <div class="tip">💡 현지인 줄서는 찐맛집</div>
+                    <a href="https://maps.google.com/?q=楊寶寶蒸餃+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
                 <div class="restaurant-card">
                     <h4>鴨肉珍 (야로우젠)</h4>
                     <div class="cuisine">오리요리 / 50년 전통</div>
                     <div class="menu">🦆 오리국수, 오리덮밥</div>
                     <div class="tip">💡 점심시간 피크 피하기</div>
+                    <a href="https://maps.google.com/?q=鴨肉珍+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
                 <div class="restaurant-card">
                     <h4>旗津 해산물거리</h4>
                     <div class="cuisine">해산물 / 치진섬</div>
                     <div class="menu">🦐 새우, 조개, 생선구이</div>
                     <div class="tip">💡 가격 흥정 필수! 현금 준비</div>
+                    <a href="https://maps.google.com/?q=旗津海產街+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
                 <div class="restaurant-card">
                     <h4>度小月 (두샤오웨)</h4>
                     <div class="cuisine">단짜이미엔 원조</div>
                     <div class="menu">🍜 담백한 국수, 루러우판</div>
                     <div class="tip">💡 대만 전역 체인이지만 맛있음</div>
+                    <a href="https://maps.google.com/?q=度小月+高雄" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> 지도</a>
                 </div>
             </div>
         </div>
@@ -1540,7 +1561,6 @@
         <!-- Transportation Section -->
         <div class="food-tab-content" id="tab-transport">
         <div class="transport-section">
-            <h2><i class="fas fa-subway" style="color: #0ea5e9;"></i> 가오슝 교통 가이드</h2>
             <div class="transport-grid">
                 <div class="transport-card recommended">
                     <h4><i class="fas fa-train"></i> MRT (지하철)</h4>
@@ -1697,7 +1717,6 @@
         <!-- Budget Section -->
         <div class="budget-section" id="budget-section">
             <div class="budget-header">
-                <h2><i class="fas fa-wallet" style="color: #667eea;"></i> 예산 계획</h2>
                 <div class="budget-toggle">
                     <button class="active" data-travelers="2">2인</button>
                     <button data-travelers="1">1인</button>
@@ -1795,7 +1814,6 @@
             <div class="page-title"><h3>✅ 준비물 체크</h3></div>
         <!-- Packing List -->
         <div class="packing-section" id="packing-section">
-            <h2><i class="fas fa-suitcase" style="color: #667eea;"></i> 준비물 체크리스트</h2>
             <div class="packing-grid">
                 <div class="packing-category">
                     <h4>📄 필수 서류</h4>
