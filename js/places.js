@@ -1,4 +1,44 @@
 // ====================
+// Places Card Rendering
+// ====================
+
+// 카드 HTML 생성
+function createPlaceCard(place) {
+    const mapUrl = `https://maps.google.com/maps/search/${encodeURIComponent(place.name)}+高雄`;
+
+    return `
+        <div class="place-card" data-area="${place.area}" data-category="${place.category}" data-lat="${place.lat}" data-lng="${place.lng}">
+            <div class="card-main">
+                <h4>${place.name} <small>(${place.nameKo})</small></h4>
+                <div class="card-meta">${place.categoryEmoji} ${place.categoryKo} · 📍${place.areaKo}</div>
+                <div class="hours">⏰ ${place.hours}</div>
+            </div>
+            <div class="card-right">
+                <div class="distance" data-dist>-</div>
+                <a href="${mapUrl}" target="_blank" class="map-btn">지도</a>
+            </div>
+        </div>
+    `;
+}
+
+// 카드 렌더링
+function renderPlaceCards() {
+    const foodGrid = document.querySelector('#tab-food .place-grid');
+    const attractionGrid = document.querySelector('#tab-attraction .place-grid');
+
+    if (foodGrid) {
+        foodGrid.innerHTML = places.food.map(createPlaceCard).join('');
+    }
+
+    if (attractionGrid) {
+        attractionGrid.innerHTML = places.attractions.map(createPlaceCard).join('');
+    }
+}
+
+// 페이지 로드 시 카드 렌더링
+renderPlaceCards();
+
+// ====================
 // GPS Location & Distance
 // ====================
 let currentLat = null;
